@@ -17,6 +17,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ng-json-cms": [
+        "dist/ng-json-cms"
+      ],
+      "ng-json-cms/*": [
+        "dist/ng-json-cms/*"
+      ]
+    }
   }
 }
