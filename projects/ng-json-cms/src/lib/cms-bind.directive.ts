@@ -1,4 +1,4 @@
-import { Directive, OnInit, Input } from '@angular/core';
+import { Directive, OnInit, Input, ElementRef } from '@angular/core';
 import { ContentService } from './content-service.service';
 import { HttpClient } from '@angular/common/http';
 
@@ -11,13 +11,17 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CmsBindDirective implements OnInit {
   @Input('cms-bind') directive: any;
+  public test = 'Hello world';
 
-  constructor(private contentService: ContentService) { }
+  constructor(private contentService: ContentService, private elementRef: ElementRef) { }
 
   ngOnInit() {
-    console.log('cms-bind init');
-    console.log(this.directive);
-    this.contentService.getData('./assets/content.json');
+    // console.log('cms-bind init');
+    // console.log(this.directive);
+    // this.contentService.getData('./assets/content.json');
+
+    this.contentService.query(this.directive).then(value => this.elementRef.nativeElement.innerHTML = value);
+    // this.elementRef.nativeElement.innerHtml = this.contentService.query(this.directive);
   }
 
 }
