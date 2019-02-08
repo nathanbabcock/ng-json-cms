@@ -4,13 +4,15 @@ import { CmsBindDirective } from './cms-bind.directive';
 import { HttpClientModule } from '@angular/common/http';
 import { CmsBindComponent } from './cms-bind/cms-bind.component';
 import { JsonSelectorPipe } from './json-selector.pipe';
+import { CmsForOf } from './cms-for.directive';
 
 @NgModule({
   declarations: [
     NgJsonCmsComponent,
     CmsBindDirective,
     CmsBindComponent,
-    JsonSelectorPipe
+    JsonSelectorPipe,
+    CmsForOf
   ],
   imports: [
     HttpClientModule,
@@ -19,6 +21,8 @@ import { JsonSelectorPipe } from './json-selector.pipe';
     NgJsonCmsComponent,
     CmsBindDirective,
     CmsBindComponent,
+    JsonSelectorPipe,
+    CmsForOf
   ],
 })
 export class NgJsonCmsModule { }

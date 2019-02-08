@@ -1,14 +1,14 @@
 {
   "pages": {
-    "components": {
-      "avatar": {
+    "components": [
+      {
         "title": "Avatar",
         "description": "Description"
       },
-      "badge": {
+      {
         "title": "Badge",
         "description": "Badge desc"
       }
-    }
+    ]
   }
 }
