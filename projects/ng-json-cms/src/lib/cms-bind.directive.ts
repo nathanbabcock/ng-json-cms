@@ -3,14 +3,14 @@ import { ContentService } from './content-service.service';
 import { HttpClient } from '@angular/common/http';
 
 @Directive({
-  selector: '[cms-bind]', // tslint:disable-line:directive-selector
+  selector: '[cms-bind-old]', // tslint:disable-line:directive-selector
   providers: [
     ContentService,
     HttpClient
   ],
 })
 export class CmsBindDirective implements OnInit {
-  @Input('cms-bind') directive: any;
+  @Input('cms-bind-old') directive: any;
   public test = 'Hello world';
 
   constructor(private contentService: ContentService, private elementRef: ElementRef) { }

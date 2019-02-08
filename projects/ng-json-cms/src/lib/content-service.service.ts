@@ -9,7 +9,7 @@ export class ContentService {
   private file = './assets/content.json';
 
   constructor(private http: HttpClient) {
-    // this.getData(this.file);
+    this.getData(this.file);
   }
 
   static json_selector(obj, selector) {
