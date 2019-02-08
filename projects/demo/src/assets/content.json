@@ -4,6 +4,10 @@
       "avatar": {
         "title": "Avatar",
         "description": "Description"
+      },
+      "badge": {
+        "title": "Badge",
+        "description": "Badge desc"
       }
     }
   }
