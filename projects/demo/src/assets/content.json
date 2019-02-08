@@ -1,0 +1,10 @@
+{
+  "pages": {
+    "components": {
+      "avatar": {
+        "title": "Avatar",
+        "description": "Description"
+      }
+    }
+  }
+}
