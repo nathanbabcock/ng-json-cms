@@ -9,6 +9,9 @@
         "title": "Badge",
         "description": "Badge desc"
       }
-    ]
+    ],
+    "guidelines": {
+      "hello": "hello world"
+    }
   }
 }
