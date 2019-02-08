@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ContentService {
   public data: any;
+  public editMode = true;
   private file = './assets/content.json';
 
   constructor(private http: HttpClient) {

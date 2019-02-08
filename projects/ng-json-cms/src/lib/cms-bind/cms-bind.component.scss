@@ -1,0 +1,13 @@
+:host[contentEditable] {
+  border: 2px dashed grey;
+
+  &:hover {
+    border-color: black;
+  }
+
+  &:active,
+  &:focus {
+    border-color: red;
+    outline: none;
+  }
+}
