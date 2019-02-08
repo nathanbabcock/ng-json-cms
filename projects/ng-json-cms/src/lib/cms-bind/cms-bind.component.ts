@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ContentService } from '../content-service.service';
 
 @Component({
@@ -8,6 +8,7 @@ import { ContentService } from '../content-service.service';
   providers: [ContentService],
 })
 export class CmsBindComponent implements OnInit {
+  @Input() source;
 
   constructor(public contentService: ContentService) { }
 
