@@ -5,4 +5,4 @@
 <span *ngFor="let item of [1,2,3,4,5]">This is {{item}}.<br></span>
 
 <h1>CmsFor</h1>
-<span *cmsFor="'pages.components'">This is {{item}}.<br></span>
+<span *cmsFor="'pages.components'">This is <span cms-bind source="title">LOADING</span>.<br></span>
