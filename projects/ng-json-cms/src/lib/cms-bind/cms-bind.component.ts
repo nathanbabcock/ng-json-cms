@@ -13,6 +13,8 @@ export class CmsBindComponent implements OnInit {
     return this.contentService.editMode;
   }
 
+  cms = {};
+
   constructor(public contentService: ContentService) { }
 
   ngOnInit() {

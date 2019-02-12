@@ -1,12 +1,16 @@
-import { Directive, ViewContainerRef, TemplateRef, OnInit, Input, OnChanges } from '@angular/core';
+import { Directive, ViewContainerRef, TemplateRef, OnInit, Input, OnChanges,
+  ViewChildren, AfterViewInit, QueryList, ContentChildren } from '@angular/core';
 import { ContentService } from './content-service.service';
+import { CmsBindComponent } from './cms-bind/cms-bind.component';
 
 @Directive({
   selector: '[cmsFor]'
 })
-export class CmsForOf implements OnInit, OnChanges {
+
+export class CmsFor implements OnInit, OnChanges, AfterViewInit { // tslint:disable-line:directive-class-suffix
   @Input() cmsFor: any;
   // @Input() source: string;
+  @ContentChildren('*') cmsBindChildren;
 
   constructor(private container: ViewContainerRef, private template: TemplateRef<any>, private contentService: ContentService) { }
 
@@ -24,5 +28,12 @@ export class CmsForOf implements OnInit, OnChanges {
 
   ngOnInit(): void {
     // this.container.createEmbeddedView(this.template);
+  }
+
+  ngAfterViewInit() {
+    console.log('my children are here:', this.cmsBindChildren);
+    this.cmsBindChildren.changes.subscribe(() => {
+      console.log('my children are here:', this.cmsBindChildren);
+    });
   }
 }

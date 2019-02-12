@@ -1,0 +1,50 @@
+<!-- Object binding -->
+<!-- MUST INJECT CMS SERVICE INTO EVERY COMPONENT -->
+<a [(cmsBind)]="cms.data.asdf" [href]="cms.data.asdf" cmsBindType="plain" cmsBindInline="false">
+  <ng-container [(cmsBind)]="cms.data.asdf2">{{cms.data.asdf2}}</ng-container>
+</a>
+
+<article *cmsFor="let article of cms.data.news">
+  <h2 [(cmsBind)]="article.title">{{article.title}}</h2>
+  <div class="tags">
+    <span *cmsFor="let tag of article.tags" [(cmsBind)]="tag">{{tag}}</span>
+  </div>
+</article>
+
+<!-- String binding -->
+<a cmsBind="asdf" cmsBindField="href" cmsBindType="plain" cmsBindInline="false">
+  <ng-container cmsBind="asdf2"></ng-container>
+</a>
+
+<article *cmsFor="let article of 'news'">
+  <h2 cmsBind="{{article}}.title"></h2>
+  <div class="tags">
+    <span *cmsFor="let tag of article+'.tags'" cmsBind="tag"></span>
+  </div>
+</article>
+
+<!-- Metadata schema -->
+<msiBind source="asdf" [target]="#a"></msiBind>
+<msiBind source="asdf" [target]="#a"></msiBind>
+<msiBind source="asdf" [target]="#a"></msiBind>
+<msiBind source="asdf" [target]="#a"></msiBind>
+
+<a #a></a>
+
+<article #article>
+  <h2 #h2></h2>
+  <div class="tags">
+    <span *cmsFor="let tag of article+'.tags'" cmsBind="tag"></span>
+  </div>
+</article>
+
+<!-- String binding take 2 -->
+
+<a cmsBind [cmsBindSource]="{'href': 'asdf.href', 'innerHTML': 'asdf.text'}"></a>
+
+<article *cmsFor="let article of 'asdf.news'">
+  <h2 cmsBind="{{article}}.title"></h2>
+  <div class="tags">
+    <span *cmsFor="let tag of article+'.tags'" cmsBind="tag"></span>
+  </div>
+</article>

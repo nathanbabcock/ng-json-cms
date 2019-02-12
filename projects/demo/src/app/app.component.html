@@ -1,8 +1,13 @@
-<cms-ng-json-cms></cms-ng-json-cms>
-<div cms-bind source="pages.guidelines.hello">cms-bind</div>
+<!-- <cms-ng-json-cms></cms-ng-json-cms>
+<div cms-bind [(source)]="cms.pages.guidelines.hello">cms-bind</div>
 
 <h1>NgFor</h1>
 <span *ngFor="let item of [1,2,3,4,5]">This is {{item}}.<br></span>
 
 <h1>CmsFor</h1>
 <span *cmsFor="'pages.components'">This is <span cms-bind source="title">LOADING</span>.<br></span>
+
+<span *cmsFor="let page of 'pages.components'">This is <span cms-bind [source]="page.title">LOADING</span>.<br></span> -->
+
+
+<div cms-bind source="pages.guidelines.hello">loading</div>
