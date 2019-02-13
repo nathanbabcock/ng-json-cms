@@ -1,39 +1,40 @@
-import { Directive, ViewContainerRef, TemplateRef, OnInit, Input, OnChanges,
-  ViewChildren, AfterViewInit, QueryList, ContentChildren } from '@angular/core';
+import { Directive, ViewContainerRef, TemplateRef, OnInit, Input, OnChanges } from '@angular/core';
 import { ContentService } from './content-service.service';
-import { CmsBindComponent } from './cms-bind/cms-bind.component';
 
 @Directive({
   selector: '[cmsFor]'
 })
 
-export class CmsFor implements OnInit, OnChanges, AfterViewInit { // tslint:disable-line:directive-class-suffix
-  @Input() cmsFor: any;
-  // @Input() source: string;
-  @ContentChildren('*') cmsBindChildren;
+export class CmsFor implements OnInit, OnChanges { // tslint:disable-line:directive-class-suffix
+  @Input() cmsForOf: any;
 
-  constructor(private container: ViewContainerRef, private template: TemplateRef<any>, private contentService: ContentService) { }
+  constructor(
+    private container: ViewContainerRef,
+    private template: TemplateRef<any>,
+    private contentService: ContentService
+  ) {}
 
   ngOnChanges() {
-    console.log(this.cmsFor);
     this.container.clear();
-    this.contentService.query(this.cmsFor).then(content => {
-      console.log(content);
+    this.contentService.query(this.cmsForOf).then(content => {
+      let i = 0;
       for (const input of content) {
-        console.log(input);
-        this.container.createEmbeddedView(this.template);
+        ++i;
+        // TODO this could be a separate class CmsForOfContext
+        const context = {
+           $implicit: this.cmsForOf+`[${i}]`,
+           index: i,
+           first: i === 0,
+           last: i === content.length - 1,
+           even: i % 2 === 0,
+           odd: i % 2 !== 0,
+        };
+        this.container.createEmbeddedView(this.template, context);
       }
     });
   }
 
   ngOnInit(): void {
     // this.container.createEmbeddedView(this.template);
-  }
-
-  ngAfterViewInit() {
-    console.log('my children are here:', this.cmsBindChildren);
-    this.cmsBindChildren.changes.subscribe(() => {
-      console.log('my children are here:', this.cmsBindChildren);
-    });
   }
 }

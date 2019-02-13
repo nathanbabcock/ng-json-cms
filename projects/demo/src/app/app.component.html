@@ -11,3 +11,9 @@
 
 
 <div cms-bind source="pages.guidelines.hello">loading</div>
+
+<h1>NgFor</h1>
+<span *ngFor="let item of [1,2,3,4,5]">This is {{item}}.<br></span>
+
+<h1>CmsFor</h1>
+<span *cmsFor="let component of 'pages.components'">This is {{component}} <span cms-bind source="{{component}}.title">LOADING</span>.<br></span>
