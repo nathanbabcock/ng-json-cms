@@ -19,7 +19,6 @@ export class CmsFor implements OnInit, OnChanges { // tslint:disable-line:direct
     this.contentService.query(this.cmsForOf).then(content => {
       let i = 0;
       for (const input of content) {
-        ++i;
         // TODO this could be a separate class CmsForOfContext
         const context = {
            $implicit: this.cmsForOf+`[${i}]`,
@@ -30,6 +29,7 @@ export class CmsFor implements OnInit, OnChanges { // tslint:disable-line:direct
            odd: i % 2 !== 0,
         };
         this.container.createEmbeddedView(this.template, context);
+        ++i;
       }
     });
   }

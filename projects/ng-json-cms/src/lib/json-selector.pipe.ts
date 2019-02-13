@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import * as jsonPath from 'jsonpath/jsonpath';
 
 @Pipe({
   name: 'jsonSelector'
@@ -6,16 +7,24 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class JsonSelectorPipe implements PipeTransform {
 
   transform(obj: any, selector: string): any {
-    const path = selector.split('.');
-    let cur = obj;
-    for (const segment of path) {
-      try {
-        cur = cur[segment];
-      } catch {
-        return cur;
-      }
-    }
-    return cur;
+    try {
+      const result = jsonPath.query(obj, selector);
+      console.log(`Pipe found `, result);
+      return result;
+    } catch {}
+    return null;
+    // console.log(jsonPath.query(obj, selector));
+
+    // const path = selector.split('.');
+    // let cur = obj;
+    // for (const segment of path) {
+    //   try {
+    //     cur = cur[segment];
+    //   } catch {
+    //     return cur;
+    //   }
+    // }
+    // return cur;
   }
 
 }
