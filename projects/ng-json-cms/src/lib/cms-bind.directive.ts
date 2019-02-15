@@ -5,7 +5,6 @@ import { HttpClient } from '@angular/common/http';
 @Directive({
   selector: '[cmsBindOld]', // tslint:disable-line:directive-selector
   providers: [
-    ContentService,
     HttpClient
   ],
 })

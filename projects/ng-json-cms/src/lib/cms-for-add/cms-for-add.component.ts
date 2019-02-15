@@ -3,7 +3,7 @@ import { ContentService } from '../content-service.service';
 import { CmsFor } from '../cms-for.directive';
 
 @Component({
-  selector: 'cms-cms-for-add',
+  selector: 'cms-for-add',
   templateUrl: './cms-for-add.component.html',
   styleUrls: ['./cms-for-add.component.css']
 })
@@ -18,9 +18,7 @@ export class CmsForAddComponent implements OnInit {
 
   public addRow() {
     this.contentService.query(this.source).then(content => {
-      console.log(content);
       content.push({});
-      console.log(content);
       this.cmsFor.ngOnChanges();
     });
   }

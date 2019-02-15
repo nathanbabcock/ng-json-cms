@@ -6,6 +6,7 @@ import { CmsBindComponent } from './cms-bind/cms-bind.component';
 import { JsonSelectorPipe } from './json-selector.pipe';
 import { CmsFor } from './cms-for.directive';
 import { CmsForAddComponent } from './cms-for-add/cms-for-add.component';
+import { CmsForRemoveComponent } from './cms-for-remove/cms-for-remove.component';
 
 let stuff = [
   NgJsonCmsComponent,
@@ -13,7 +14,8 @@ let stuff = [
   CmsBindComponent,
   JsonSelectorPipe,
   CmsFor,
-  CmsForAddComponent
+  CmsForAddComponent,
+  CmsForRemoveComponent,
 ];
 
 @NgModule({
@@ -22,7 +24,8 @@ let stuff = [
     HttpClientModule,
   ],
   entryComponents: [
-    CmsForAddComponent
+    CmsForAddComponent,
+    CmsForRemoveComponent,
   ],
   exports: stuff
 })

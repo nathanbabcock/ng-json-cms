@@ -1,6 +1,7 @@
 import { Directive, ViewContainerRef, TemplateRef, OnInit, Input, OnChanges, ComponentFactoryResolver, ComponentFactory, ComponentRef } from '@angular/core';
 import { ContentService } from './content-service.service';
 import { CmsForAddComponent } from './cms-for-add/cms-for-add.component';
+import { CmsForRemoveComponent } from './cms-for-remove/cms-for-remove.component';
 
 @Directive({
   selector: '[cmsFor]'
@@ -20,6 +21,7 @@ export class CmsFor implements OnInit, OnChanges { // tslint:disable-line:direct
     this.container.clear();
     this.contentService.query(this.cmsForOf).then(content => {
       let i = 0;
+      const removeFactory: ComponentFactory<CmsForRemoveComponent> = this.resolver.resolveComponentFactory(CmsForRemoveComponent);
       for (const input of content) {
         // TODO this could be a separate class CmsForOfContext
         const context = {
@@ -31,20 +33,22 @@ export class CmsFor implements OnInit, OnChanges { // tslint:disable-line:direct
            odd: i % 2 !== 0,
         };
         this.container.createEmbeddedView(this.template, context);
-        ++i;
 
-        // const test = this.renderer.createElement('div');
-        // const text = this.renderer.createText('Click here to add li');
-        // this.renderer.appendChild(test, text);
-        // this.renderer.appendChild(this.element.nativeElement, test);
+        const removeRef: ComponentRef<CmsForRemoveComponent> = this.container.createComponent(removeFactory);
+        removeRef.instance.source = this.cmsForOf;
+        removeRef.instance.index = i;
+        removeRef.instance.cmsFor = this;
+        this.container.insert(removeRef.hostView);
+
+        ++i;
       }
 
-      const factory: ComponentFactory<CmsForAddComponent> = this.resolver.resolveComponentFactory(CmsForAddComponent);
-      const componentRef: ComponentRef<CmsForAddComponent> = this.container.createComponent(factory);
-      componentRef.instance.source = this.cmsForOf;
-      componentRef.instance.cmsFor = this;
+      const addFactory: ComponentFactory<CmsForAddComponent> = this.resolver.resolveComponentFactory(CmsForAddComponent);
+      const addRef: ComponentRef<CmsForAddComponent> = this.container.createComponent(addFactory);
+      addRef.instance.source = this.cmsForOf;
+      addRef.instance.cmsFor = this;
       // this.container.createComponent(factory);
-      this.container.insert(componentRef.hostView);
+      this.container.insert(addRef.hostView);
     });
   }
 

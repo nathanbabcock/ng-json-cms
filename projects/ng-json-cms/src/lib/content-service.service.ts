@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ContentService {
+export class ContentService implements OnInit {
   public data: any;
   public editMode = true;
   private file = './assets/content.json';
@@ -25,12 +25,18 @@ export class ContentService {
     return cur;
   }
 
+  ngOnInit() {
+    // this.getData(this.file);
+  }
+
   public getData(file) {
     if (this.data) {
       return Promise.resolve(this.data);
     }
 
-    return this.http.get(file).toPromise().then(data => this.data = data);
+    console.log("need to pull file");
+    console.log(this.data);
+    return this.http.get(file).toPromise().then(data => {this.data = data; console.log(this.data); return data; });
   }
 
   public query(selector) {

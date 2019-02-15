@@ -9,7 +9,6 @@ export class JsonSelectorPipe implements PipeTransform {
   transform(obj: any, selector: string): any {
     try {
       const result = jsonPath.query(obj, selector);
-      console.log(`Pipe found `, result);
       return result;
     } catch {}
     return null;
