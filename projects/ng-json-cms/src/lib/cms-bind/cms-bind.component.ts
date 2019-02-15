@@ -31,6 +31,7 @@ export class CmsBindComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    // console.log('tether', Tether);
   }
 
 }
