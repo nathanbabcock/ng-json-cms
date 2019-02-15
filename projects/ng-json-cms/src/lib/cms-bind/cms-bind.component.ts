@@ -20,7 +20,7 @@ export class CmsBindComponent implements OnInit {
     if (!this.contentService.editMode) {
       return;
     }
-    jsonPath.apply(this.contentService.data, this.source, () => this.elementRef.nativeElement.innerHTML);
+    jsonPath.apply(this.contentService.data, this.source, () => this.elementRef.nativeElement.innerText);
     console.log(jsonPath.query(this.contentService.data, this.source));
   }
 
