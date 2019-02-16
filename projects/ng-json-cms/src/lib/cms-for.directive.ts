@@ -3,7 +3,7 @@ import { ContentService } from './content-service.service';
 import { CmsForAddComponent } from './cms-for-add/cms-for-add.component';
 import { CmsForRemoveComponent } from './cms-for-remove/cms-for-remove.component';
 import * as Tether from 'tether/dist/js/tether.js';
-import tippy from 'tippy.js';
+import tippy, { Tippy, Placement } from 'tippy.js';
 
 @Directive({
   selector: '[cmsFor]'
@@ -11,6 +11,8 @@ import tippy from 'tippy.js';
 
 export class CmsFor implements OnInit, OnChanges { // tslint:disable-line:directive-class-suffix
   @Input() cmsForOf: any;
+  @Input() cmsForRemovePosition: Placement = 'top-end';
+  @Input() cmsForAddPosition: Placement = 'bottom';
 
   constructor(
     private container: ViewContainerRef,
@@ -69,6 +71,7 @@ export class CmsFor implements OnInit, OnChanges { // tslint:disable-line:direct
           arrow: true,
           interactive: true,
           appendTo: 'parent',
+          placement: this.cmsForRemovePosition,
         });
 
         ++i;

@@ -11,7 +11,9 @@ import * as jsonPath from 'jsonpath/jsonpath';
 export class CmsBindComponent implements OnInit {
   public jsonPath = jsonPath;
 
-  @Input() source;
+  @Input() source: string;
+  @Input() cmsBindConfig: any = {};
+
   @HostBinding('attr.contentEditable') get editMode() {
     return this.contentService.editMode;
   }
