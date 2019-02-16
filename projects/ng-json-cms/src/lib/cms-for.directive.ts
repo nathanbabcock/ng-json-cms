@@ -34,35 +34,42 @@ export class CmsFor implements OnInit, OnChanges { // tslint:disable-line:direct
            even: i % 2 === 0,
            odd: i % 2 !== 0,
         };
+        console.log('this.container', this.container);
         const embeddedView = this.container.createEmbeddedView(this.template, context);
 
         const removeRef: ComponentRef<CmsForRemoveComponent> = this.container.createComponent(removeFactory);
         removeRef.instance.source = this.cmsForOf;
         removeRef.instance.index = i;
         removeRef.instance.cmsFor = this;
-        this.container.insert(removeRef.hostView);
+        // this.container.insert(removeRef.hostView);
+        // removeRef.location.nativeElement
 
         // Debug
-        console.log(removeRef.location.nativeElement);
-        console.log(embeddedView.rootNodes[0]);
+        console.log('removeRef.location.nativeElement', removeRef.location.nativeElement);
+        console.log('embeddedView.rootNodes[0]', embeddedView.rootNodes[0]);
         // console.log('embeddedView.rootNodes', embeddedView.rootNodes);
 
         // Tether
-        const tether = new Tether({
-          element: removeRef.location.nativeElement,
-          target: embeddedView.rootNodes[0],
-          attachment: 'middle left',
-          targetAttachment: 'middle right',
-          constraints: [
-            {
-              to: 'scrollParent',
-              attachment: 'together'
-            }
-          ]
-        });
+        // const tether = new Tether({
+        //   element: removeRef.location.nativeElement,
+        //   target: embeddedView.rootNodes[0],
+        //   attachment: 'middle left',
+        //   targetAttachment: 'middle right',
+        //   constraints: [
+        //     {
+        //       to: 'scrollParent',
+        //       attachment: 'together'
+        //     }
+        //   ]
+        // });
 
         // Tippy.js
-        tippy(embeddedView.rootNodes[0], { content: 'hello world'});
+        tippy(embeddedView.rootNodes[0], {
+          content: removeRef.location.nativeElement.childNodes[0], //'<a href="javascript:void(0)" style="color:white">remove</a>',
+          arrow: true,
+          interactive: true,
+          appendTo: 'parent',
+        });
 
         ++i;
       }
@@ -72,7 +79,7 @@ export class CmsFor implements OnInit, OnChanges { // tslint:disable-line:direct
       addRef.instance.source = this.cmsForOf;
       addRef.instance.cmsFor = this;
       // this.container.createComponent(factory);
-      this.container.insert(addRef.hostView);
+      // this.container.insert(addRef.hostView);
     });
   }
 
