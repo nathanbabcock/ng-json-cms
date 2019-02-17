@@ -70,19 +70,36 @@ export class CmsFor implements OnInit, OnChanges { // tslint:disable-line:direct
           content: removeRef.location.nativeElement.childNodes[0], //'<a href="javascript:void(0)" style="color:white">remove</a>',
           arrow: true,
           interactive: true,
-          appendTo: 'parent',
           placement: this.cmsForRemovePosition,
+          multiple: true,
         });
+
+        if (context.last) {
+          this.createAddComponent(embeddedView.rootNodes[0]);
+        }
 
         ++i;
       }
 
-      const addFactory: ComponentFactory<CmsForAddComponent> = this.resolver.resolveComponentFactory(CmsForAddComponent);
-      const addRef: ComponentRef<CmsForAddComponent> = this.container.createComponent(addFactory);
-      addRef.instance.source = this.cmsForOf;
-      addRef.instance.cmsFor = this;
-      // this.container.createComponent(factory);
-      // this.container.insert(addRef.hostView);
+
+    });
+  }
+
+  createAddComponent(anchor: Element) {
+    const addFactory: ComponentFactory<CmsForAddComponent> = this.resolver.resolveComponentFactory(CmsForAddComponent);
+    const addRef: ComponentRef<CmsForAddComponent> = this.container.createComponent(addFactory);
+    addRef.instance.source = this.cmsForOf;
+    addRef.instance.cmsFor = this;
+    // this.container.createComponent(factory);
+    // this.container.insert(addRef.hostView);
+
+    tippy(anchor, {
+      content: addRef.location.nativeElement.childNodes[0], //'<a href="javascript:void(0)" style="color:white">remove</a>',
+      arrow: false,
+      interactive: true,
+      placement: this.cmsForAddPosition,
+      // showOnInit: true,
+      // trigger: null,
     });
   }
 
