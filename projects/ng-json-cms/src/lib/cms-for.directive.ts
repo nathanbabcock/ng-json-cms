@@ -3,7 +3,7 @@ import { ContentService } from './content-service.service';
 import { CmsForAddComponent } from './cms-for-add/cms-for-add.component';
 import { CmsForRemoveComponent } from './cms-for-remove/cms-for-remove.component';
 import tippy, { Placement } from 'tippy.js';
-import { Sortable } from '@shopify/draggable';
+import { Sortable, Plugins } from '@shopify/draggable';
 
 @Directive({
   selector: '[cmsFor]'
@@ -71,7 +71,7 @@ export class CmsFor implements OnInit, OnChanges { // tslint:disable-line:direct
           arrow: true,
           interactive: true,
           placement: this.cmsForRemovePosition,
-          appendTo: embeddedView.rootNodes[0],
+          // appendTo: embeddedView.rootNodes[0],
           multiple: true,
           // trigger: 'click',
         });
@@ -86,14 +86,6 @@ export class CmsFor implements OnInit, OnChanges { // tslint:disable-line:direct
         ++i;
       }
 
-      const sortable = new Sortable(document.getElementById('sortable'), {
-        // draggable: 'span.draggable-source'
-      });
-
-      sortable.on('sortable:start', () => console.log('sortable:start'));
-      sortable.on('sortable:sort', () => console.log('sortable:sort'));
-      sortable.on('sortable:sorted', () => console.log('sortable:sorted'));
-      sortable.on('sortable:stop', () => console.log('sortable:stop'));
 
     });
   }
@@ -117,6 +109,20 @@ export class CmsFor implements OnInit, OnChanges { // tslint:disable-line:direct
   }
 
   ngOnInit(): void {
-    // this.container.createEmbeddedView(this.template);
+    
+    const sortable = new Sortable(document.querySelectorAll('.sortable-container'), {
+      // draggable: 'span.draggable-source',
+      swapAnimation: {
+        duration: 200,
+        easingFunction: 'ease-in-out',
+        horizontal: true
+      },
+      plugins: [Plugins.SwapAnimation]
+    });
+
+    // sortable.on('sortable:start', () => console.log('sortable:start'));
+    // sortable.on('sortable:sort', () => console.log('sortable:sort'));
+    // sortable.on('sortable:sorted', () => console.log('sortable:sorted'));
+    // sortable.on('sortable:stop', () => console.log('sortable:stop'));
   }
 }

@@ -9,15 +9,22 @@
 
 <span *cmsFor="let page of 'pages.components'">This is <span cms-bind [source]="page.title">LOADING</span>.<br></span> -->
 
-
+<h1>CmsBind</h1>
 <div cms-bind source="pages.guidelines.hello">loading</div>
 <div cms-bind source="pages.guidelines.hello">loading 2</div>
+
+<h1>Angular one-way binding</h1>
+<!-- <br>data = {{data | json}}
+<br>data.test = {{data.test | json}}
+<br>data.test.hello = {{data.test.hello | json}} -->
+<br>cms = {{cms | json}}
+<br><button (click)="data={test:{hello: 'world'}}">Click</button>
 
 <h1>NgFor</h1>
 <span *ngFor="let item of [1,2,3,4,5]">This is {{item}}.<br></span>
 
 <h1>CmsFor</h1>
-<div id="sortable">
+<div class="sortable-container">
   <span *cmsFor="let component of 'pages.components';removePosition: 'right'">
     This is {{component}} <span cms-bind source="{{component}}.title">LOADING</span>.<br>
   </span>
