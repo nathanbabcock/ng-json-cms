@@ -2,8 +2,8 @@ import { Directive, ViewContainerRef, TemplateRef, OnInit, Input, OnChanges, Com
 import { ContentService } from './content-service.service';
 import { CmsForAddComponent } from './cms-for-add/cms-for-add.component';
 import { CmsForRemoveComponent } from './cms-for-remove/cms-for-remove.component';
-import * as Tether from 'tether/dist/js/tether.js';
-import tippy, { Tippy, Placement } from 'tippy.js';
+import tippy, { Placement } from 'tippy.js';
+import { Sortable } from '@shopify/draggable';
 
 @Directive({
   selector: '[cmsFor]'
@@ -71,16 +71,29 @@ export class CmsFor implements OnInit, OnChanges { // tslint:disable-line:direct
           arrow: true,
           interactive: true,
           placement: this.cmsForRemovePosition,
+          appendTo: embeddedView.rootNodes[0],
           multiple: true,
+          // trigger: 'click',
         });
 
         if (context.last) {
           this.createAddComponent(embeddedView.rootNodes[0]);
         }
 
+        // Sortable
+        embeddedView.rootNodes[0].className += 'draggable-source';
+
         ++i;
       }
 
+      const sortable = new Sortable(document.getElementById('sortable'), {
+        // draggable: 'span.draggable-source'
+      });
+
+      sortable.on('sortable:start', () => console.log('sortable:start'));
+      sortable.on('sortable:sort', () => console.log('sortable:sort'));
+      sortable.on('sortable:sorted', () => console.log('sortable:sorted'));
+      sortable.on('sortable:stop', () => console.log('sortable:stop'));
 
     });
   }
